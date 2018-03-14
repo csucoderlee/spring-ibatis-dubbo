@@ -1,0 +1,160 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.csu</groupId>
+    <artifactId>spring-ibatis-dubbo</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>spring-ibatis-dubbo Maven Webapp</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <druid-version>1.0.7</druid-version>
+        <mysql-version>5.1.24</mysql-version>
+        <groovy-version>2.4.6</groovy-version>
+        <fastjson-version>1.2.38</fastjson-version>
+        <mybatis-version>3.4.1</mybatis-version>
+        <spring-version>3.2.8.RELEASE</spring-version>
+    </properties>
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring-version}</version>
+        </dependency>
+
+        <!-- new one groovy file -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <version>${groovy-version}</version>
+        </dependency>
+
+        <!-- scope:provided 只在编译和测试使用, 因为tomcat容器中自带servlet, 项目启动时会与pom中的servlet起冲突 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- MySql的JDBC驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis-version}</version>
+        </dependency>
+
+        <!--Mybatis与spring整合包-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>3.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>spring-ibatis-dubbo</finalName>
+
+        <plugins>
+            <!-- idea 修改默认jdk版本 , 会出现修改完成之后 ,又会变回之前默认的版本
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+
+            tomcat 插件，此版本的插件不能使用jdk1.8的版本，会报jsper编译错误-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                    <url>http://lee.csu.org</url>
+                    <port>8080</port>
+                    <path>/</path>
+                    <uriEncoding>utf-8</uriEncoding>
+                    <!-- tomcat 的启动变量-->
+                    <!--<systemProperties>-->
+                    <!--<dev.open>true</dev.open>-->
+                    <!--</systemProperties>-->
+                </configuration>
+            </plugin>
+
+            <!-- 编译src/main/groovy文件到 classes目录下 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <compilerId>groovy-eclipse-compiler</compilerId>
+                    <!--
+                          <compilerArgument>nowarn</compilerArgument>
+                    -->
+                    <compilerArguments>
+                        <Xlint/>
+                    </compilerArguments>
+                    <verbose>false</verbose>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                    <showWarnings>true</showWarnings>
+                    <!--<useIncrementalCompilation>yes</useIncrementalCompilation>-->
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-compiler</artifactId>
+                        <version>2.9.1-01</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.codehaus.groovy</groupId>
+                        <artifactId>groovy-eclipse-batch</artifactId>
+                        <version>2.4.3-01</version>
+                    </dependency>
+                    <!--  Uncomment to compile against Groovy 1.7.10 -->
+                    <!-- <dependency>
+                         <groupId>org.codehaus.groovy</groupId>
+                         <artifactId>groovy-eclipse-batch</artifactId>
+                         <version>1.7.10-02</version>
+                         </dependency> -->
+                </dependencies>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>
