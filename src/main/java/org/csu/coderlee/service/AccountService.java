@@ -1,7 +1,10 @@
 package org.csu.coderlee.service;
 
+import org.csu.coderlee.dao.AccountMapper;
 import org.csu.coderlee.domian.Account;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author by bixi.lx
@@ -10,8 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AccountService implements IAccountService{
 
+    @Resource
+    AccountMapper accountMapper;
+
     @Override
     public Account info() {
-        return null;
+        return accountMapper.selectById(1L);
     }
 }
