@@ -13,22 +13,22 @@
         <druid-version>1.0.7</druid-version>
         <mysql-version>5.1.24</mysql-version>
         <groovy-version>2.4.6</groovy-version>
-        <fastjson-version>1.2.38</fastjson-version>
-        <mybatis-version>3.4.1</mybatis-version>
-        <spring-version>3.2.8.RELEASE</spring-version>
+        <fastjson.version>1.1.46</fastjson.version>
+        <mybatis-version>3.2.3</mybatis-version>
+        <spring.version>3.2.8.RELEASE</spring.version>
     </properties>
     <dependencies>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${spring-version}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${spring-version}</version>
+            <version>${spring.version}</version>
         </dependency>
 
         <!-- new one groovy file -->
@@ -70,7 +70,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>${fastjson-version}</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
         <dependency>

@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class UserRole implements Serializable{
 
+    private static final long serialVersionUID = -2108896641822238785L;
+
     /**
      * 系统角色表
      */

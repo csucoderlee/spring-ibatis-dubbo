@@ -10,6 +10,7 @@ import java.util.List;
  */
 public class Privilege implements Serializable{
 
+    private static final long serialVersionUID = 8231331835816980771L;
 
     private Long id;
 

@@ -9,6 +9,8 @@ import java.util.Date;
  */
 public class Role implements Serializable{
 
+    private static final long serialVersionUID = 5654870117994484401L;
+
     /**
      * 系统角色表
      */
