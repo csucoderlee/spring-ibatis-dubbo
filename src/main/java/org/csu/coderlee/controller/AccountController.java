@@ -1,8 +1,14 @@
 package org.csu.coderlee.controller;
 
+import org.csu.coderlee.domain.Account;
+import org.csu.coderlee.domain.Post;
+import org.csu.coderlee.service.AccountService;
+import org.csu.coderlee.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.annotation.Resource;
 
 /**
  * @author by bixi.lx
@@ -12,9 +18,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/account")
 public class AccountController {
 
+    @Resource
+    AccountService accountService;
+    @Resource
+    PostService postService;
+
     @RequestMapping("/info")
     @ResponseBody
     public Object accountInfo() {
-        return null;
+        Account account =  accountService.info();
+        return account;
+    }
+
+    @RequestMapping("/post")
+    @ResponseBody
+    public Object postInfo() {
+         Post post =  postService.get();
+         return post;
     }
 }

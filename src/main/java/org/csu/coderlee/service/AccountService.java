@@ -1,7 +1,7 @@
 package org.csu.coderlee.service;
 
 import org.csu.coderlee.dao.AccountMapper;
-import org.csu.coderlee.domian.Account;
+import org.csu.coderlee.domain.Account;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package org.csu.coderlee.service;
 
-import org.csu.coderlee.domian.Account;
+import org.csu.coderlee.domain.Account;
 
 /**
  * @author by bixi.lx

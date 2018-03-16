@@ -1,6 +1,6 @@
 package org.csu.coderlee.domain;
 
-import org.csu.coderlee.domian.Account;
+import org.csu.coderlee.domain.Account;
 
 import java.io.Serializable;
 import java.util.Date;

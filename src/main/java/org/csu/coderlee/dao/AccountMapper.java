@@ -1,6 +1,6 @@
 package org.csu.coderlee.dao;
 
-import org.csu.coderlee.domian.Account;
+import org.csu.coderlee.domain.Account;
 import org.mybatis.spring.annotation.MapperScan;
 
 /**

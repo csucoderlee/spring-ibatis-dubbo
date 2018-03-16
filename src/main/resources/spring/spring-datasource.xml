@@ -6,6 +6,7 @@
 
     <context:property-placeholder location="classpath:build.properties"/>
     <mybatis:scan base-package="org.csu.coderlee.dao"/>
+
     <!-- 慢sql监控-->
     <bean id="stat-filters" class="com.alibaba.druid.filter.stat.StatFilter">
         <property name="slowSqlMillis" value="1000"/>
@@ -16,7 +17,8 @@
         <!--<property name="filters" value="stat" />-->
 
         <!-- 别名配置是通过filters属性配置的，filters属性的类型是String。如果需要通过bean的方式配置，使用proxyFilters属性 -->
-        <property name="driverClassName" value="${jdbc.business.driverClassName}"></property>
+        <property name="driverClassName" value="${jdbc.business.driverClassName}"/>
+        <property name="username" value="${jdbc.business.username}"/>
         <property name="url" value="${jdbc.business.url}"/>
         <property name="password" value="${jdbc.business.password}"/>
         <property name="proxyFilters">

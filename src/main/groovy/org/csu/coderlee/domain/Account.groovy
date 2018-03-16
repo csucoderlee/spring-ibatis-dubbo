@@ -1,4 +1,4 @@
-package org.csu.coderlee.domian
+package org.csu.coderlee.domain
 
 /**
  * @author by bixi.lx
@@ -22,7 +22,7 @@ public class Account {
     /**
      * 帐号名称
      */
-    private String userName;
+    private String username;
     /**
      * 登录密码
      */
