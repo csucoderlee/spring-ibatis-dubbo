@@ -27,4 +27,29 @@ public class XxxPlatformImportService extends AbstractPlatformImportService{
     public void fullImportCustom(List<Account> accountList) {
 
     }
+
+    @Override
+    public void get() {
+
+    }
+
+    @Override
+    public void set() {
+
+    }
+
+    @Override
+    public void cache() {
+
+    }
+
+    @Override
+    public void flush() {
+
+    }
+
+    @Override
+    public void touch() {
+
+    }
 }

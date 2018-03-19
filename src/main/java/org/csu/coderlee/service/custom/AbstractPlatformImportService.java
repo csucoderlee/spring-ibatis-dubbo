@@ -8,7 +8,7 @@ import java.util.List;
  * @author by bixi.lx
  * @created on 2018 03 18 17:32
  */
-public abstract class AbstractPlatformImportService implements ICustomImportService, IProcessImportService{
+public abstract class AbstractPlatformImportService implements ICustomImportService, IProcessImportService, RedisUtil{
 
     abstract void importCustom(List<Account> accountList);
 
