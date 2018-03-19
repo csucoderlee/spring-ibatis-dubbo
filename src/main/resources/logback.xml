@@ -9,22 +9,14 @@
     </appender>
 
     <!--没有设置addtivity，默认为true，将此loger的打印信息向上级传递-->
-    <logger name="java.sql.Statement" additivity="flase">
-        <level value="debug"/>
-        <appender-ref ref="CONSOLE"/>
-    </logger>
-    <logger name="java.sql.PreparedStatement" additivity="false">
-        <level value="debug"/>
-        <appender-ref ref="CONSOLE"/>
-    </logger>
-    <logger name="java.sql.ResultSet" additivity="false">
+    <logger name="org.csu.coderlee.dao" additivity="false">
         <level value="debug"/>
         <appender-ref ref="CONSOLE"/>
     </logger>
 
     <!-- root 的日志级别， 比当前级别大的级别都会打印出来-->
     <!-- logback的日志级别从小到大 ：TRACE, DEBUG, INFO, WARN, ERROR -->
-    <root level="debug">
-        <appender-ref ref="CONSOLE"/>
-    </root>
+    <!--<root level="debug">-->
+        <!--<appender-ref ref="CONSOLE"/>-->
+    <!--</root>-->
 </configuration>
