@@ -1,6 +1,7 @@
 package org.csu.coderlee.service;
 
 import org.csu.coderlee.domain.Account;
+import org.csu.coderlee.domain.Page;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface IAccountService {
 
     Account getById(Long id);
 
-    List<Account> list();
+    List<Account> list(Page page);
 
     Account addAccount(Account account);
 

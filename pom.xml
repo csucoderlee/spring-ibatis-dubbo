@@ -120,6 +120,59 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <configPath>profiles/dev/conf</configPath>
+            </properties>
+            <!--<dependencies></dependencies>-->
+            <build>
+                <filters>
+                    <filter>profiles/dev/build.properties</filter>
+                </filters>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>profiles/dev/conf</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <configPath>profiles/prod/conf</configPath>
+            </properties>
+            <!--<dependencies></dependencies>-->
+            <build>
+                <filters>
+                    <filter>profiles/dev/build.properties</filter>
+                </filters>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                    <resource>
+                        <directory>profiles/prod/conf</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <finalName>spring-ibatis-dubbo</finalName>
 

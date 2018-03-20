@@ -2,6 +2,7 @@ package org.csu.coderlee.service;
 
 import org.csu.coderlee.dao.AccountMapper;
 import org.csu.coderlee.domain.Account;
+import org.csu.coderlee.domain.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -28,8 +29,8 @@ public class AccountService implements IAccountService{
     }
 
     @Override
-    public List<Account> list() {
-        return null;
+    public List<Account> list(Page page) {
+        return accountMapper.selectAll(page);
     }
 
     @Override
