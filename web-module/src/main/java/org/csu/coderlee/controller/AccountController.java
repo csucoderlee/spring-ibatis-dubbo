@@ -2,9 +2,7 @@ package org.csu.coderlee.controller;
 
 import org.csu.coderlee.domain.Account;
 import org.csu.coderlee.domain.Page;
-import org.csu.coderlee.domain.Post;
 import org.csu.coderlee.service.AccountService;
-import org.csu.coderlee.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;

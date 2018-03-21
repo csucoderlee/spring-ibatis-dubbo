@@ -45,7 +45,7 @@ import java.lang.reflect.Modifier
  * @created on 2018 03 21 14:08
  */
 @GroovyASTTransformation(phase = CompilePhase.SEMANTIC_ANALYSIS)
-class RestEndpointASTTransformation implements ASTTransformation{
+class RestEndpointASTTransformation implements ASTTransformation {
 
     static final ClassNode controllerClassNode = new ClassNode(Controller)
     static final ClassNode requestMappingClassNode = new ClassNode(RequestMapping)
@@ -105,26 +105,26 @@ class RestEndpointASTTransformation implements ASTTransformation{
 
                     int modifiers = m.getModifiers()
 
-                    if (!(modifiers & Modifier.PUBLIC) || (modifiers & Modifier.STATIC ) )
+                    if (!(modifiers & Modifier.PUBLIC) || (modifiers & Modifier.STATIC))
                         return
 
                     modifiers ^= Modifier.ABSTRACT
 
                     MethodNode controllerMethodNode = new MethodNode(methodName, modifiers, m.getReturnType(), parameters, m.getExceptions(), null)
                     AnnotationNode requestMappingAnnotationNode = new AnnotationNode(requestMappingClassNode)
-                    requestMappingAnnotationNode.setMember("value", new ListExpression([ new ConstantExpression("/" + methodName) ] ) )
-                    requestMappingAnnotationNode.setMember("produces", new ListExpression([new ConstantExpression("application/json") ] ))
-                    requestMappingAnnotationNode.setMember("consumes", new ListExpression([ new ConstantExpression("application/json"), new ConstantExpression("application/json; charset=UTF-8;")] ))
+                    requestMappingAnnotationNode.setMember("value", new ListExpression([new ConstantExpression("/" + methodName)]))
+                    requestMappingAnnotationNode.setMember("produces", new ListExpression([new ConstantExpression("application/json")]))
+                    requestMappingAnnotationNode.setMember("consumes", new ListExpression([new ConstantExpression("application/json"), new ConstantExpression("application/json; charset=UTF-8;")]))
 
                     BlockStatement mainBlock = new BlockStatement()
                     Statement startTime = new ExpressionStatement(new DeclarationExpression(
                             new VariableExpression("startTime"),
                             Token.newSymbol("=", -1, -1),
-                            new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date),new ArgumentListExpression()),"getTime",new ArgumentListExpression())))
+                            new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date), new ArgumentListExpression()), "getTime", new ArgumentListExpression())))
                     mainBlock.addStatement(startTime)
                     if (allBasicType(parameters)) {
-                        requestMappingAnnotationNode.setMember("method", new ListExpression( [new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
-                                                                                              new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST")) ] ))
+                        requestMappingAnnotationNode.setMember("method", new ListExpression([new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
+                                                                                             new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST"))]))
                         controllerMethodNode.setParameters(annotateParams(parameters))
 
                         Statement stmt = new ExpressionStatement(new MethodCallExpression(new FieldExpression(delegateFieldNode),
@@ -134,9 +134,9 @@ class RestEndpointASTTransformation implements ASTTransformation{
 
 
                         controllerMethodNode.setCode(mainBlock)
-                    }else if (singleMap(parameters)) {
-                        requestMappingAnnotationNode.setMember("method", new ListExpression( [ new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
-                                                                                               new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST")) ] ))
+                    } else if (singleMap(parameters)) {
+                        requestMappingAnnotationNode.setMember("method", new ListExpression([new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
+                                                                                             new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST"))]))
                         Parameter param = parameters[0]
                         Parameter annotatedParameter = new Parameter(param.getType(), param.getName())
                         annotatedParameter.addAnnotation(new AnnotationNode(requestBodyClassNode))
@@ -147,7 +147,7 @@ class RestEndpointASTTransformation implements ASTTransformation{
                         controllerMethodNode.setReturnType(mapClassNode)
 
                         TupleExpression logMethodCallParams = new TupleExpression(new FieldExpression(loggerFieldNode), new ConstantExpression(m.toString()))
-                        parameters.each { p->
+                        parameters.each { p ->
                             logMethodCallParams.addExpression(new VariableExpression(p))
                         }
 
@@ -180,7 +180,7 @@ class RestEndpointASTTransformation implements ASTTransformation{
                         Statement endTime = new ExpressionStatement(new DeclarationExpression(
                                 new VariableExpression("endTime"),
                                 Token.newSymbol("=", -1, -1),
-                                new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date),new ArgumentListExpression()), "getTime", new ArgumentListExpression())))
+                                new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date), new ArgumentListExpression()), "getTime", new ArgumentListExpression())))
 
                         TupleExpression logMethodTimeCallParams = new TupleExpression(new FieldExpression(loggerFieldNode), new ConstantExpression(m.toString()),
                                 new VariableExpression("startTime"), new VariableExpression("endTime"))
@@ -199,9 +199,9 @@ class RestEndpointASTTransformation implements ASTTransformation{
 
                         controllerMethodNode.setCode(mainBlock)
 
-                    }else{
-                        requestMappingAnnotationNode.setMember("method", new ListExpression( [ new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
-                                                                                               new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST")) ] ))
+                    } else {
+                        requestMappingAnnotationNode.setMember("method", new ListExpression([new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
+                                                                                             new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST"))]))
                         controllerMethodNode.setParameters(wrapParametersInNewClass(controllerPackageName, controllerClassName, methodName, parameters, moduleNode))
 
                         def args = parameters.collect {
@@ -229,28 +229,28 @@ class RestEndpointASTTransformation implements ASTTransformation{
 
                     int modifiers = m.getModifiers()
 
-                    if (!(modifiers & Modifier.PUBLIC) || (modifiers & Modifier.STATIC ) )
+                    if (!(modifiers & Modifier.PUBLIC) || (modifiers & Modifier.STATIC))
                         return
 
                     modifiers ^= Modifier.ABSTRACT
 
                     MethodNode controllerMethodNode = new MethodNode(methodName + "1", modifiers, m.getReturnType(), parameters, m.getExceptions(), null)
                     AnnotationNode requestMappingAnnotationNode = new AnnotationNode(requestMappingClassNode)
-                    requestMappingAnnotationNode.setMember("value", new ListExpression([ new ConstantExpression("/" + methodName) ] ) )
-                    requestMappingAnnotationNode.setMember("produces", new ListExpression([ new ConstantExpression("application/json") ] ))
-                    requestMappingAnnotationNode.setMember("consumes", new ListExpression([new ConstantExpression("!application/json"), new ConstantExpression("!application/json; charset=UTF-8;")] ))
+                    requestMappingAnnotationNode.setMember("value", new ListExpression([new ConstantExpression("/" + methodName)]))
+                    requestMappingAnnotationNode.setMember("produces", new ListExpression([new ConstantExpression("application/json")]))
+                    requestMappingAnnotationNode.setMember("consumes", new ListExpression([new ConstantExpression("!application/json"), new ConstantExpression("!application/json; charset=UTF-8;")]))
 
                     BlockStatement mainBlock = new BlockStatement()
                     Statement startTime = new ExpressionStatement(new DeclarationExpression(
                             new VariableExpression("startTime"),
                             Token.newSymbol("=", -1, -1),
-                            new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date),new ArgumentListExpression()),"getTime",new ArgumentListExpression())))
+                            new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date), new ArgumentListExpression()), "getTime", new ArgumentListExpression())))
                     mainBlock.addStatement(startTime)
 
 
                     if (singleMap(parameters)) {
-                        requestMappingAnnotationNode.setMember("method", new ListExpression( [ new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
-                                                                                               new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST")) ] ))
+                        requestMappingAnnotationNode.setMember("method", new ListExpression([new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("GET")),
+                                                                                             new AttributeExpression(new ClassExpression(requestMethodClassNode), new ConstantExpression("POST"))]))
                         Parameter param = parameters[0]
                         Parameter annotatedParameter = new Parameter(param.getType(), param.getName())
                         annotatedParameter.addAnnotation(new AnnotationNode(requestParamClassNode))
@@ -261,7 +261,7 @@ class RestEndpointASTTransformation implements ASTTransformation{
                         controllerMethodNode.setReturnType(mapClassNode)
 
                         TupleExpression logMethodCallParams = new TupleExpression(new FieldExpression(loggerFieldNode), new ConstantExpression(m.toString()))
-                        parameters.each { p->
+                        parameters.each { p ->
                             logMethodCallParams.addExpression(new VariableExpression(p))
                         }
 
@@ -293,7 +293,7 @@ class RestEndpointASTTransformation implements ASTTransformation{
                         Statement endTime = new ExpressionStatement(new DeclarationExpression(
                                 new VariableExpression("endTime"),
                                 Token.newSymbol("=", -1, -1),
-                                new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date),new ArgumentListExpression()), "getTime", new ArgumentListExpression())))
+                                new MethodCallExpression(new ConstructorCallExpression(new ClassNode(Date), new ArgumentListExpression()), "getTime", new ArgumentListExpression())))
 
                         TupleExpression logMethodTimeCallParams = new TupleExpression(new FieldExpression(loggerFieldNode), new ConstantExpression(m.toString()),
                                 new VariableExpression("startTime"), new VariableExpression("endTime"))

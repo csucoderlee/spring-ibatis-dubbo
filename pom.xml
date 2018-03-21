@@ -7,6 +7,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>rest-helper</module>
+        <module>web-module</module>
     </modules>
 
     <name>spring-ibatis-dubbo Maven Webapp</name>
@@ -22,235 +23,113 @@
         <version.logback>1.1.3</version.logback>
         <version.slf4j>1.7.24</version.slf4j>
     </properties>
-    <dependencies>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
 
-        <!-- new one groovy file -->
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
-        </dependency>
+            <!-- new one groovy file -->
+            <dependency>
+                <groupId>org.codehaus.groovy</groupId>
+                <artifactId>groovy-all</artifactId>
+                <version>${groovy.version}</version>
+            </dependency>
 
-        <!-- scope:provided 只在编译和测试使用, 因为tomcat容器中自带servlet, 项目启动时会与pom中的servlet起冲突 -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
+            <!-- scope:provided 只在编译和测试使用, 因为tomcat容器中自带servlet, 项目启动时会与pom中的servlet起冲突 -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
 
-        <!-- MySql的JDBC驱动 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-            <scope>runtime</scope>
-        </dependency>
+            <!-- MySql的JDBC驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+                <scope>runtime</scope>
+            </dependency>
 
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
 
-        <!--Mybatis与spring整合包-->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>1.2.2</version>
-        </dependency>
+            <!--Mybatis与spring整合包-->
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>1.2.2</version>
+            </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>${fastjson.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.9.3</version>
-        </dependency>
+            <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.9.3</version>
+            </dependency>
 
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
 
-        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
-        <!--<dependency>-->
+            <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+            <!--<dependency>-->
             <!--<groupId>log4j</groupId>-->
             <!--<artifactId>log4j</artifactId>-->
             <!--<version>1.2.17</version>-->
-        <!--</dependency>-->
+            <!--</dependency>-->
 
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${version.logback}</version>
-        </dependency>
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${version.logback}</version>
+            </dependency>
 
-        <!--<dependency>-->
+            <!--<dependency>-->
             <!--<groupId>ch.qos.logback</groupId>-->
             <!--<artifactId>logback-core</artifactId>-->
             <!--<version>${version.logback}</version>-->
-        <!--</dependency>-->
+            <!--</dependency>-->
 
-        <!--<dependency>-->
+            <!--<dependency>-->
             <!--<groupId>org.logback-extensions</groupId>-->
             <!--<artifactId>logback-ext-spring</artifactId>-->
             <!--<version>0.1.2</version>-->
-        <!--</dependency>-->
+            <!--</dependency>-->
 
-    <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-            <version>${version.slf4j}</version>
-        </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>log4j-over-slf4j</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <configPath>profiles/dev/conf</configPath>
-            </properties>
-            <!--<dependencies></dependencies>-->
-            <build>
-                <filters>
-                    <filter>profiles/dev/build.properties</filter>
-                </filters>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>profiles/dev/conf</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-        <profile>
-            <id>prod</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <configPath>profiles/prod/conf</configPath>
-            </properties>
-            <!--<dependencies></dependencies>-->
-            <build>
-                <filters>
-                    <filter>profiles/dev/build.properties</filter>
-                </filters>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                    <resource>
-                        <directory>profiles/prod/conf</directory>
-                        <filtering>true</filtering>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
-
-    <build>
-        <finalName>spring-ibatis-dubbo</finalName>
-
-        <plugins>
-            <!-- idea 修改默认jdk版本 , 会出现修改完成之后 ,又会变回之前默认的版本
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
-
-            tomcat 插件，此版本的插件不能使用jdk1.8的版本，会报jsper编译错误-->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <configuration>
-                    <url>http://lee.csu.org</url>
-                    <port>8080</port>
-                    <path>/</path>
-                    <uriEncoding>utf-8</uriEncoding>
-                    <!-- tomcat 的启动变量-->
-                    <!--<systemProperties>-->
-                    <!--<dev.open>true</dev.open>-->
-                    <!--</systemProperties>-->
-                </configuration>
-            </plugin>
-
-            <!-- 编译src/main/groovy文件到 classes目录下 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <!--
-                          <compilerArgument>nowarn</compilerArgument>
-                    -->
-                    <compilerArguments>
-                        <Xlint/>
-                    </compilerArguments>
-                    <verbose>false</verbose>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <showWarnings>true</showWarnings>
-                    <!--<useIncrementalCompilation>yes</useIncrementalCompilation>-->
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.9.1-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.4.3-01</version>
-                    </dependency>
-                    <!--  Uncomment to compile against Groovy 1.7.10 -->
-                    <!-- <dependency>
-                         <groupId>org.codehaus.groovy</groupId>
-                         <artifactId>groovy-eclipse-batch</artifactId>
-                         <version>1.7.10-02</version>
-                         </dependency> -->
-                </dependencies>
-            </plugin>
-
-        </plugins>
-    </build>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>3.8.1</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
