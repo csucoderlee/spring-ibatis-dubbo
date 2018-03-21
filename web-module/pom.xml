@@ -153,7 +153,7 @@
                 </configuration>
             </plugin>
 
-            tomcat 插件，此版本的插件不能使用jdk1.8的版本，会报jsper编译错误-->
+               tomcat 插件，此版本的插件不能使用jdk1.8的版本，会报jsper编译错误-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>tomcat-maven-plugin</artifactId>
@@ -167,44 +167,6 @@
                     <!--<dev.open>true</dev.open>-->
                     <!--</systemProperties>-->
                 </configuration>
-            </plugin>
-
-            <!-- 编译src/main/groovy文件到 classes目录下 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                    <!--
-                          <compilerArgument>nowarn</compilerArgument>
-                    -->
-                    <compilerArguments>
-                        <Xlint/>
-                    </compilerArguments>
-                    <verbose>false</verbose>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <showWarnings>true</showWarnings>
-                    <!--<useIncrementalCompilation>yes</useIncrementalCompilation>-->
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>2.9.1-01</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.4.3-01</version>
-                    </dependency>
-                    <!--  Uncomment to compile against Groovy 1.7.10 -->
-                    <!-- <dependency>
-                         <groupId>org.codehaus.groovy</groupId>
-                         <artifactId>groovy-eclipse-batch</artifactId>
-                         <version>1.7.10-02</version>
-                         </dependency> -->
-                </dependencies>
             </plugin>
 
         </plugins>
