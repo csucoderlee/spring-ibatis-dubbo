@@ -8,6 +8,7 @@
     <modules>
         <module>rest-helper</module>
         <module>web-module</module>
+        <module>api-sdk</module>
     </modules>
 
     <name>spring-ibatis-dubbo Maven Webapp</name>
